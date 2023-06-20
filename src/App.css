@@ -10,8 +10,12 @@ body {
 }
 .app {
   background: #a8d5e5;
-  border:2px solid;
   
+  
+}
+
+.appbar {
+  flex: auto;
 }
 h1 {
   color: #165a72;

@@ -1,7 +1,8 @@
-import { AppBar, Toolbar, IconButton, Typography, InputBase, Select, MenuItem } from "@mui/material";
+import { AppBar, Toolbar, IconButton,  InputBase, Select, MenuItem } from "@mui/material";
 import { styled, alpha } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+
 
 import './TopBar.css';
 
@@ -39,13 +40,14 @@ const TopBar = () => {
   const handleFilterChange = (event) => {
     console.log("Filter changed:", event.target.value);
   };
-
+ 
   return (
     <ThemeProvider theme={theme}>
       <AppBar className="AppBar" position="static" >
-        <Toolbar>
-          <SearchContainer>
-            <SearchInput placeholder="Search…" />
+        <Toolbar className="tool-bar">
+    
+          <SearchContainer className="search-container">
+            <SearchInput className="search-input" placeholder="Search…" />
             <IconButton sx={{ p: 1 }} aria-label="search">
               <SearchIcon />
             </IconButton>
@@ -59,12 +61,12 @@ const TopBar = () => {
             <MenuItem value="" disabled>
               Filter by
             </MenuItem>
-            <MenuItem value="option1">Model</MenuItem>
-            <MenuItem value="option2">Make</MenuItem>
-            <MenuItem value="option3">Color</MenuItem>
-            <MenuItem value="option1">Features</MenuItem>
-            <MenuItem value="option2">Fuel Type</MenuItem>
-            <MenuItem value="option3">Transmission Type</MenuItem>
+            <MenuItem value="model">Model</MenuItem>
+            <MenuItem value="make">Make</MenuItem>
+            <MenuItem value="color">Color</MenuItem>
+            <MenuItem value="features">Features</MenuItem>
+            <MenuItem value="fuelType">Fuel Type</MenuItem>
+            <MenuItem value="transmissionType">Transmission Type</MenuItem>
           </FilterSelect>
           
         </Toolbar>

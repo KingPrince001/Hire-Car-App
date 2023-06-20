@@ -1,4 +1,3 @@
-import  { useState, useEffect } from "react";
 import {Sidebar, Menu, MenuItem, SubMenu, useProSidebar} from 'react-pro-sidebar';
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
@@ -31,19 +30,6 @@ import './App.css';
 function App() {
 
   const {collapseSidebar} =  useProSidebar();
-
-  const [openSubMenu, setOpenSubMenu] = useState(null);
-  // create a function to handle submenu click
-  const handleSubMenuClick = (label) => {
-    // if the clicked submenu is already open, close it
-    if (openSubMenu === label) {
-      setOpenSubMenu(null);
-    } else {
-      // otherwise, close any other submenu and open the clicked one
-      setOpenSubMenu(label);
-    }
-  };
-
     return (
    <div style={{display:'flex', minHeight:'100vh', alignItems:'stretch'}}>
 <Sidebar className='app' >
@@ -57,13 +43,11 @@ function App() {
     <h2 >HireWheels</h2>
   </MenuItem>
   <MenuItem   title="Home" component={<Link to='/'  />} icon={<AccountBalanceRoundedIcon />}>Home</MenuItem>
-  <SubMenu   title="Reservations" label="Reservations"  open={openSubMenu === "Reservations"}
-            onClick={() => handleSubMenuClick("Reservations")} icon={<GridViewRoundedIcon />}>
+  <SubMenu   title="Reservations" label="Reservations" icon={<GridViewRoundedIcon />}>
   <MenuItem component={<Link to='reserve'  />} icon={<ReceiptRoundedIcon />}>Reserve</MenuItem>
   <MenuItem component={<Link to='activeReservations'  />} icon={<BarChartRoundedIcon />}>Active</MenuItem>
   </SubMenu>
-  <SubMenu   title="Settings" label="Settings"  open={openSubMenu === "Settings"}
-            onClick={() => handleSubMenuClick("Settings")} icon={<SettingsApplicationsRoundedIcon />}>
+  <SubMenu   title="Settings" label="Settings" icon={<SettingsApplicationsRoundedIcon />}>
   <MenuItem component={<Link to='account'  />} icon={<AccountCircleRoundedIcon />}>Account</MenuItem>
   <MenuItem component={<Link to='privacy'  />} icon={<ShieldRoundedIcon />}>Privacy</MenuItem>
   <MenuItem component={<Link to='notifications'  />} icon={<NotificationsRoundedIcon />}>Notifications</MenuItem>

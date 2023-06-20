@@ -1,9 +1,10 @@
-
+import RegisterForm from "../components/register/RegisterForm";
+import './register.css';
 
 const Register = () => {
     return (
-      <div>
-  Register
+      <div className="register-page">
+       <RegisterForm />
       </div>
     )
   }

@@ -4,6 +4,7 @@ const Home = () => {
   return (
     <div className="container2">
 <TopBar />
+Home
     </div>
   )
 }
