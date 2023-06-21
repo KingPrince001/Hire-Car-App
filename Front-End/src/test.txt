@@ -1,4 +1,3 @@
-import  { useState, useEffect } from "react";
 import {Sidebar, Menu, MenuItem, SubMenu, useProSidebar} from 'react-pro-sidebar';
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
@@ -23,9 +22,7 @@ import Notifications from './pages/Notifications';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import FAQ from './pages/FAQ';
-import NotFound from './pages/NotFound';
 import './App.css';
-import BusinessLogo from './assets/car-logo.jpg';
 
 
 
@@ -33,24 +30,11 @@ import BusinessLogo from './assets/car-logo.jpg';
 function App() {
 
   const {collapseSidebar} =  useProSidebar();
-
-  const [openSubMenu, setOpenSubMenu] = useState(null);
-  // create a function to handle submenu click
-  const handleSubMenuClick = (label) => {
-    // if the clicked submenu is already open, close it
-    if (openSubMenu === label) {
-      setOpenSubMenu(null);
-    } else {
-      // otherwise, close any other submenu and open the clicked one
-      setOpenSubMenu(label);
-    }
-  };
-
     return (
    <div style={{display:'flex', minHeight:'100vh', alignItems:'stretch'}}>
 <Sidebar className='app' >
 <Menu>
-  <MenuItem className='menu1' title='collapse sidebar' icon={<MenuRoundedIcon 
+  <MenuItem className='menu1' icon={<MenuRoundedIcon 
    
   onClick={() => {
     collapseSidebar();
@@ -59,13 +43,11 @@ function App() {
     <h2 >HireWheels</h2>
   </MenuItem>
   <MenuItem   title="Home" component={<Link to='/'  />} icon={<AccountBalanceRoundedIcon />}>Home</MenuItem>
-  <SubMenu   title="Reservations" label="Reservations"  open={openSubMenu === "Reservations"}
-            onClick={() => handleSubMenuClick("Reservations")} icon={<GridViewRoundedIcon />}>
+  <SubMenu   title="Reservations" label="Reservations" icon={<GridViewRoundedIcon />}>
   <MenuItem component={<Link to='reserve'  />} icon={<ReceiptRoundedIcon />}>Reserve</MenuItem>
   <MenuItem component={<Link to='activeReservations'  />} icon={<BarChartRoundedIcon />}>Active</MenuItem>
   </SubMenu>
-  <SubMenu   title="Settings" label="Settings"  open={openSubMenu === "Settings"}
-            onClick={() => handleSubMenuClick("Settings")} icon={<SettingsApplicationsRoundedIcon />}>
+  <SubMenu   title="Settings" label="Settings" icon={<SettingsApplicationsRoundedIcon />}>
   <MenuItem component={<Link to='account'  />} icon={<AccountCircleRoundedIcon />}>Account</MenuItem>
   <MenuItem component={<Link to='privacy'  />} icon={<ShieldRoundedIcon />}>Privacy</MenuItem>
   <MenuItem component={<Link to='notifications'  />} icon={<NotificationsRoundedIcon />}>Notifications</MenuItem>
@@ -76,13 +58,6 @@ function App() {
   <MenuItem   title="Logout" icon={<LogoutRoundedIcon />} >Logout</MenuItem>
 </Menu>
 
-<div className="sidebar-footer">
-          <div className="footer-content">
-            <img src={BusinessLogo} alt="Footer Image" className="footer-image" />
-            <p className="footer-text">Get your best car deal</p>
-          </div>
-        </div>
-    
 </Sidebar>
 
 <section className='appbar'>
@@ -96,7 +71,7 @@ function App() {
     <Route path='login' element={<Login />} />
     <Route path='register' element={<Register />} />
     <Route path='FAQ' element={<FAQ />} />
-     <Route path='/*' element={<NotFound />} />
+   
   </Routes>
 </section>
    </div>

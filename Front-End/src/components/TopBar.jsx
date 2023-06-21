@@ -1,10 +1,12 @@
-import { AppBar, Toolbar, IconButton,  InputBase, Select, MenuItem } from "@mui/material";
+import { AppBar, Toolbar, IconButton,  InputBase, Select, MenuItem, Box } from "@mui/material";
 import { styled, alpha } from "@mui/system";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import BusinessLogo from '../assets/car-logo.jpg';
 
 
 import './TopBar.css';
+
 
 const theme = createTheme({
   palette: {
@@ -45,13 +47,17 @@ const TopBar = () => {
     <ThemeProvider theme={theme}>
       <AppBar className="AppBar" position="static" >
         <Toolbar className="tool-bar">
-    
+          <Box style={{display:'flex'}}>
+           <Box style={{ width: '3vw', height: '6vh' }}>
+            <img src={BusinessLogo} style={{height:'100%', width:'100%', borderRadius:'50%'}} alt="Business Logo" />
+           </Box>
           <SearchContainer className="search-container">
             <SearchInput className="search-input" placeholder="Search…" />
             <IconButton sx={{ p: 1 }} aria-label="search">
               <SearchIcon />
             </IconButton>
           </SearchContainer>
+          </Box>
           <FilterSelect className="filter"
             value=""
             onChange={handleFilterChange}

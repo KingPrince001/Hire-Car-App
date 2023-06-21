@@ -2,6 +2,7 @@
   "name": "car-hire-app",
   "private": true,
   "version": "0.0.0",
+  "proxy": "http://localhost:8081",
   "type": "module",
   "scripts": {
     "dev": "vite",
