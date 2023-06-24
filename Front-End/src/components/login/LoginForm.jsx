@@ -1,4 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../context/userContext/context';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -13,17 +16,37 @@ const schema = yup.object().shape({
 });
 
 const LoginForm = () => {
+  const {dispatch} = useContext(Context);
+  // help navigate to reserve page
+  const navigate = useNavigate()
+  
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data); 
-  };
+  
 
+
+  const onSubmit = (data) => {
+    console.log(data);
+    axios.post("http://localhost:8081/auth/login", data)
+      .then(({data}) => {
+        if(data.token) {
+          //context is made aware of logged in user
+          dispatch({type: "LOGIN_SUCCESS", payload: data})
+//redirecting logged in user to reserve page
+navigate('/reserve')
+        }
+      })
+  
+    .catch(({response}) => {
+      alert(response.data.error)
+    })
+  };
+ 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} >
         <Grid item xs={12}>
           <TextField
             label="First Name"

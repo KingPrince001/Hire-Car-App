@@ -158,6 +158,7 @@ VALUES
     first_name VARCHAR(25),
     last_name VARCHAR(25),
     email VARCHAR(50),
+    password VARCHAR(150),
     phone_number VARCHAR(20),
     home_address VARCHAR(100),
     gender VARCHAR(10),

@@ -4,30 +4,40 @@ import config from '../DataBase/config.js';
 
 // Creating a connection pool
 const pool = new sql.ConnectionPool(config.sql);
-const poolConnect = pool.connect();
 
-// try-catch block to handle errors
 export const allCars = async (req, res) => {
   let connection;
   try {
-    connection = await poolConnect;
-// query to execute 
+    connection = await pool.connect();
+    
     const result = await connection.request().query('SELECT * FROM cars');
 
-    res.status(200).json({ result });
-  } catch (error) {
-    // Logging the error details for debugging
-    console.error('Error occurred while fetching all cars:', error);
+    // Extract the car data from the result
+    const cars = result.recordset.map((record) => ({
+      car_id: record.car_id,
+      available: record.available,
+      make: record.make,
+      model: record.model,
+      year: record.year,
+      size: record.size,
+      mileage: record.mileage,
+      fuel_type: record.fuel_type,
+      transmission_type: record.transmission_type,
+      features: record.features,
+      category_id: record.category_id,
+    }));
 
-    //  error message to the client
+    res.status(200).json(cars);
+  } catch (error) {
+    console.error('Error occurred while fetching all cars:', error);
     res.status(500).json({ error: 'An error occurred while fetching all cars' });
   } finally {
-    // Releasing the connection back to the pool
     if (connection) {
       connection.close();
     }
   }
 };
+
 
 
 // Use a try-catch block to handle errors

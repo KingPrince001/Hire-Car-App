@@ -1,4 +1,5 @@
-import  { useState, useEffect } from "react";
+import  { useState, useContext } from "react";
+import {Context} from './context/userContext/context';
 import {Sidebar, Menu, MenuItem, SubMenu, useProSidebar} from 'react-pro-sidebar';
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import GridViewRoundedIcon from "@mui/icons-material/GridViewRounded";
@@ -32,6 +33,12 @@ import BusinessLogo from './assets/car-logo.jpg';
 
 function App() {
 
+const {user, dispatch} = useContext(Context)
+
+const handleLogout = () => {
+  dispatch({type: "LOGOUT"})
+}
+
   const {collapseSidebar} =  useProSidebar();
 
   const [openSubMenu, setOpenSubMenu] = useState(null);
@@ -59,7 +66,10 @@ function App() {
     <h2 >HireWheels</h2>
   </MenuItem>
   <MenuItem   title="Home" component={<Link to='/'  />} icon={<AccountBalanceRoundedIcon />}>Home</MenuItem>
-  <SubMenu   title="Reservations" label="Reservations"  open={openSubMenu === "Reservations"}
+  {
+    user && (
+      <>
+       <SubMenu   title="Reservations" label="Reservations"  open={openSubMenu === "Reservations"}
             onClick={() => handleSubMenuClick("Reservations")} icon={<GridViewRoundedIcon />}>
   <MenuItem component={<Link to='reserve'  />} icon={<ReceiptRoundedIcon />}>Reserve</MenuItem>
   <MenuItem component={<Link to='activeReservations'  />} icon={<BarChartRoundedIcon />}>Active</MenuItem>
@@ -70,10 +80,15 @@ function App() {
   <MenuItem component={<Link to='privacy'  />} icon={<ShieldRoundedIcon />}>Privacy</MenuItem>
   <MenuItem component={<Link to='notifications'  />} icon={<NotificationsRoundedIcon />}>Notifications</MenuItem>
   </SubMenu>
+  <MenuItem onClick={handleLogout}  title="Logout" icon={<LogoutRoundedIcon />} >Logout</MenuItem>
+      </>
+    )
+  }
+ 
   <MenuItem   title="Login" component={<Link to='login'  />} icon={<LockOutlinedIcon />}>Login</MenuItem>
   <MenuItem   title="Register" component={<Link to='register'  />} icon={<PersonAddIcon />}>Register</MenuItem>
   <MenuItem   title="FAQ" component={<Link to='FAQ'  />} icon={<HelpOutlineIcon />}>FAQ</MenuItem>
-  <MenuItem   title="Logout" icon={<LogoutRoundedIcon />} >Logout</MenuItem>
+  
 </Menu>
 
 <div className="sidebar-footer">

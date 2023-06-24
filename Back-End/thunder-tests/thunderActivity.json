@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "3f2a5829-48fe-42ae-adae-3d87a4a33b57",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:8081",
+    "url": "http://localhost:8081/auth/login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-22T11:31:16.567Z",
+    "modified": "2023-06-22T21:11:30.275Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formencoded",
+      "raw": "",
+      "form": [
+        {
+          "name": "first_name",
+          "value": "john"
+        },
+        {
+          "name": "last_name",
+          "value": "prince"
+        },
+        {
+          "name": "email",
+          "value": "kingprince2445@gmail.com"
+        },
+        {
+          "name": "password",
+          "value": "King1234@Prince"
+        }
+      ]
+    },
+    "tests": []
+  }
+]

@@ -1,4 +1,4 @@
-
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -6,14 +6,14 @@ import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Person, Email, Phone, Home, Lock, Visibility, VisibilityOff } from '@mui/icons-material';
 
 const schema = yup.object().shape({
-  firstName: yup.string().required('First Name is required'),
-  lastName: yup.string().required('Last Name is required'),
+  first_name: yup.string().required('First Name is required'),
+  last_name: yup.string().required('Last Name is required'),
   email: yup.string().email('Invalid email').required('Email is required'),
-  phoneNumber: yup.string().required('Phone Number is required'),
-  homeAddress: yup.string().required('Home Address is required'),
+  phone_number: yup.string().required('Phone Number is required'),
+  home_address: yup.string().required('Home Address is required'),
   gender: yup.string().required('Gender is required'),
-  nationalId: yup.string().required('National ID is required'),
-  driversLicenseId: yup.string().required("Driver's License ID is required"),
+  national_id: yup.string().required('National ID is required'),
+  drivers_license_id: yup.string().required("Driver's License ID is required"),
   password: yup
     .string()
     .required('Password is required')
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]+$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
     ),
-  confirmPassword: yup
+  confirm_password: yup
     .string()
     .required('Confirm Password is required')
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
@@ -38,8 +38,18 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (data) => {
+    axios.post("http://localhost:8081/auth/register", data)
+      .then((response) => {
+        response.data.message && alert(response.data.message);
+        console.log(response);
+      })
+      .catch((error) => {
+        alert(error.response.data.error); 
+      });
+  
     console.log(data);
   };
+ 
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -53,9 +63,9 @@ const RegisterForm = () => {
         <Grid item xs={12}>
           <TextField
             label="First Name"
-            {...register('firstName')}
-            error={!!errors.firstName}
-            helperText={errors.firstName?.message}
+            {...register('first_name')}
+            error={!!errors.first_name}
+            helperText={errors.first_name?.message}
             fullWidth
             margin="normal"
             InputProps={{
@@ -67,9 +77,9 @@ const RegisterForm = () => {
         <Grid item xs={12}>
           <TextField
             label="Last Name"
-            {...register('lastName')}
-            error={!!errors.lastName}
-            helperText={errors.lastName?.message}
+            {...register('last_name')}
+            error={!!errors.last_name}
+            helperText={errors.last_name?.message}
             fullWidth
             margin="normal"
             InputProps={{
@@ -95,9 +105,9 @@ const RegisterForm = () => {
         <Grid item xs={6}>
           <TextField
             label="Phone Number"
-            {...register('phoneNumber')}
-            error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber?.message}
+            {...register('phone_number')}
+            error={!!errors.phone_number}
+            helperText={errors.phone_number?.message}
             fullWidth
             margin="normal"
             InputProps={{
@@ -109,9 +119,9 @@ const RegisterForm = () => {
         <Grid item xs={6}>
           <TextField
             label="Home Address"
-            {...register('homeAddress')}
-            error={!!errors.homeAddress}
-            helperText={errors.homeAddress?.message}
+            {...register('home_address')}
+            error={!!errors.home_address}
+            helperText={errors.home_address?.message}
             fullWidth
             margin="normal"
             InputProps={{
@@ -134,9 +144,9 @@ const RegisterForm = () => {
         <Grid item xs={6}>
           <TextField
             label="National ID"
-            {...register('nationalId')}
-            error={!!errors.nationalId}
-            helperText={errors.nationalId?.message}
+            {...register('national_id')}
+            error={!!errors.national_id}
+            helperText={errors.national_id?.message}
             fullWidth
             margin="normal"
           />
@@ -145,9 +155,9 @@ const RegisterForm = () => {
         <Grid item xs={6}>
           <TextField
             label="Driver's License ID"
-            {...register('driversLicenseId')}
-            error={!!errors.driversLicenseId}
-            helperText={errors.driversLicenseId?.message}
+            {...register('drivers_license_id')}
+            error={!!errors.drivers_license_id}
+            helperText={errors.drivers_license_id?.message}
             fullWidth
             margin="normal"
           />
@@ -173,9 +183,9 @@ const RegisterForm = () => {
           <TextField
             label="Confirm Password"
             type="password"
-            {...register('confirmPassword')}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword?.message}
+            {...register('confirm_password')}
+            error={!!errors.confirm_password}
+            helperText={errors.confirm_password?.message}
             fullWidth
             margin="normal"
             InputProps={{

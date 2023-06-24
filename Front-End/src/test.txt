@@ -79,3 +79,109 @@ function App() {
 }
 
 export default App
+
+
+
+ return (
+    <div>
+      
+      {cars.length === 0 ? (
+      <div>
+        <h2 style={{marginLeft:'40px'}}>Off-Loading Car List ...</h2>
+ <img src={DataLoadingAnimation} className='data-loading' alt="Data Loading..." />
+      </div>
+       
+      ) : (
+        cars.map((car) => (
+          <div key={car.car_id}>
+            <h3>{car.make} {car.model}</h3>
+            <p>Year: {car.year}</p>
+            <p>Mileage: {car.mileage}</p>
+            <p>Size: {car.size}</p>
+            <p>Fuel Type: {car.fuel_type}</p>
+            <p>Transmission Type: {car.transmission_type}</p>
+            <p>Features: {car.features}</p>
+          </div>
+        ))
+      )}
+    </div>
+  );
+
+
+
+  import { useState, useEffect } from 'react';
+import DataLoadingAnimation from '../../assets/carpool-animate.svg';
+import '../../pages/home.css';
+import one from '../../assets/1.jpg';
+import two from '../../assets/2.jpg';
+import three from '../../assets/3.jpg';
+import four from '../../assets/4.jpg';
+import five from '../../assets/5.jpg';
+import six from '../../assets/6.jpg';
+import seven from '../../assets/7.jpg';
+import eight from '../../assets/8.jpg';
+import nine from '../../assets/9.jpg';
+import ten from '../../assets/10.jpg';
+
+const CarList = () => {
+  const [cars, setCars] = useState([]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await fetch('http://localhost:8081/cars', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+      setCars(data);
+    } catch (error) {
+      console.error('Error fetching car data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCars();
+  }, []);
+
+  console.log(cars);
+
+  const carImageNames = [one, two, three, four, five, six, seven, eight, nine, ten];
+  const mappedCarData = cars.map((car, index) => {
+    const carImageName = carImageNames[index];
+    const imageUrl = carImageName;
+
+    return {
+      ...car,
+      imageUrl
+    }
+  });
+
+  return (
+    <div>
+      {cars.length === 0 ? (
+        <div>
+          <h2 style={{ marginLeft: '40px' }}>Off-Loading Car List ...</h2>
+          <img src={DataLoadingAnimation} className='data-loading' alt="Data Loading..." />
+        </div>
+      ) : (
+        mappedCarData.map((car) => (
+          <div key={car.id}>
+            <img className='car-images' src={car.imageUrl} alt={car.model} />
+            <h3>{car.make} {car.model}</h3>
+            <p>Year: {car.year}</p>
+            <p>Mileage: {car.mileage}</p>
+            <p>Size: {car.size}</p>
+            <p>Fuel Type: {car.fuel_type}</p>
+            <p>Transmission Type: {car.transmission_type}</p>
+            <p>Features: {car.features}</p>
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
+
+export default CarList;

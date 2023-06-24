@@ -14,6 +14,8 @@ import * as yup from 'yup';
 import DriveEtaOutlinedIcon from '@mui/icons-material/DriveEtaOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import './home.css';
+
 
 const useStyles = styled((theme) => ({
   container: {
@@ -51,7 +53,7 @@ const Reserve = () => {
     console.log('Reservation Data:', data);
   };
 
-  return (
+  return (<>
     <Container className={classes.container}>
       <Typography variant="h4" className={classes.title}>Reserve a Car</Typography>
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
@@ -94,6 +96,8 @@ const Reserve = () => {
         </Button>
       </form>
     </Container>
+   
+    </>
   );
 };
 

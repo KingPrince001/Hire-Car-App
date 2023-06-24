@@ -1,6 +1,6 @@
 import LoginForm from "../components/login/LoginForm";
 import './login.css'
-import RegisterLink from "../components/login/RegisterLink";
+import Redirect from "../components/Redirect";
 import LoginPageTitle from "../components/login/LoginPageTitle";
 const login =() => {
   return (
@@ -8,7 +8,7 @@ const login =() => {
       <LoginPageTitle />
       <LoginForm />
       <div className="register-link">
-      <RegisterLink />
+      <Redirect message='If you dont have an account' route='/register' redirectLinkTo='Register' />
       </div>
      
     </div>

@@ -1,8 +1,7 @@
-
 import { Link as MuiLink } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-const RegisterLink = () => {
+const Redirect = ({ message, redirectLinkTo, route }) => {
   const linkStyle = {
     textDecoration: 'underline',
     textDecorationColor: '#ff4081',
@@ -10,7 +9,7 @@ const RegisterLink = () => {
     transition: '0.3s',
     display: 'inline-block',
     color: '#ff4081',
-    marginLeft:'10px',
+    marginLeft: '10px',
   };
 
   const hoverStyle = {
@@ -20,11 +19,11 @@ const RegisterLink = () => {
 
   return (
     <span>
-      <span>If you don't have an account</span>
+      <span>{message}</span>
       <MuiLink
-      
-        component="button"
-        variant="body2"
+        component={RouterLink}
+        to={route}
+        variant="body2" 
         sx={linkStyle}
         underline="none"
         onMouseEnter={(event) => {
@@ -35,13 +34,11 @@ const RegisterLink = () => {
           event.target.style.textDecoration = 'underline';
           event.target.style.color = '#ff4081';
         }}
-        component={RouterLink}
-        to="/register"
       >
-        Register
+        {redirectLinkTo}
       </MuiLink>
     </span>
   );
 };
 
-export default RegisterLink;
+export default Redirect;
